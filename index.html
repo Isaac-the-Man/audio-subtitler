@@ -22,6 +22,12 @@
 			.blank {
 				border-bottom: 3px solid purple;
 			}
+			.half {
+				display: flex;
+			}
+			.half fieldset {
+				width: 50%;
+			}
 		</style>
 	</head>
 	<body>
@@ -29,7 +35,7 @@
 		<p>
 			Generate subtitle file (.srt) from text manually. Press (n) for next line and (b) to hold.
 		</p>
-		<form>
+		<form class="half">
 			<fieldset>
 				<legend>Song</legend>
 				<input id="songSrc" type="file" accept=".mp3">

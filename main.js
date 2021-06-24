@@ -9,6 +9,12 @@ function handleAudio() {
 	var audioSrc = this.files[0];
 	audioCtrl.src = URL.createObjectURL(audioSrc);
 	audioCtrl.load();
+	audioCtrl.onended = function() {
+		if (srtList[srtList.length - 1].end === null) {
+			srtList[srtList.length - 1].end = formatTime(audioCtrl.currentTime);
+		}
+		refresh();
+	}
 }
 
 
@@ -79,8 +85,9 @@ document.onkeypress = function(e) {
 		// n pressed
 		subIndex++;
 		subMode = 'text';
-		if (subIndex >= subList.length) {
+		if (subIndex == subList.length) {
 			document.onkeypress = null;
+			srtList[subIndex - 1].end = formatTime(audioCtrl.currentTime);
 		} else {
 			// next line
 			if (isStarting) {
@@ -117,4 +124,3 @@ function formatTime(t) {
 	});
 	return `${h}:${m}:${s},000`;
 }
-
